@@ -16,17 +16,37 @@
             overflow-x: hidden;
         }
         header {
-            padding: 40px 20px;
+            padding: 60px 20px;
+            position: relative;
         }
         h1 {
             font-size: 3rem;
             color: #0ff;
             text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
             margin-bottom: 10px;
+            animation: glowPulse 2s infinite alternate;
+        }
+        @keyframes glowPulse {
+            from { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+            to { text-shadow: 0 0 20px #ff0080, 0 0 40px #0ff; }
         }
         h2 {
             color: #ff0;
             text-shadow: 0 0 10px #ff0, 0 0 20px #ff0;
+        }
+        .neon-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff0080, #0ff, #ff0, #0ff);
+            background-size: 300% 100%;
+            animation: moveLine 3s linear infinite;
+        }
+        @keyframes moveLine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         .arena-section {
             display: flex;
@@ -87,6 +107,7 @@
 </head>
 <body>
     <header>
+        <div class="neon-lines"></div>
         <h1>Neon Sports Arena</h1>
         <h2>Pickleball • Gaming • Snooker</h2>
     </header>

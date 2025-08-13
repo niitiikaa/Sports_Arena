@@ -1,165 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neon Sports Arena</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
-        body {
-            margin: 0;
-            font-family: 'Orbitron', sans-serif;
-            background-color: #0a0a0a;
-            color: white;
-            overflow-x: hidden;
-        }
-        .swiper {
-            width: 100%;
-            height: 100vh;
-        }
-        .swiper-slide {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            background: linear-gradient(90deg, #050505, #0a0a0a);
-        }
-        .slide-text {
-            font-size: 4rem;
-            max-width: 45%;
-            color: #0ff;
-            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
-        }
-        .slide-image {
-            max-width: 40%;
-        }
-        .slide-image img {
-            width: 100%;
-            height: auto;
-        }
-        .ball {
-            position: fixed;
-            top: 50%;
-            left: -100px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #fff 0%, #0ff 100%);
-            box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
-            z-index: 999;
-        }
-        .arena-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            padding: 50px 20px;
-        }
-        .card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            width: 300px;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0,255,255,0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-        .card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 0 25px rgba(0,255,255,0.8);
-        }
-        .card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        .book-btn {
-            display: inline-block;
-            background: linear-gradient(90deg, #ff0080, #0ff);
-            padding: 15px 30px;
-            color: white;
-            font-size: 1.2rem;
-            text-decoration: none;
-            border-radius: 30px;
-            box-shadow: 0 0 15px #ff0080, 0 0 25px #0ff;
-            transition: 0.3s;
-        }
-        .book-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px #ff0080, 0 0 35px #0ff;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #777;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Sports Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <style>
+    :root{
+      --bg:#05050a;--ink:#e6faff;--neon-cyan:#00e5ff;--neon-pink:#ff2ea6;--neon-lime:#a6ff00;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Outfit',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
+
+    /* ----- NAV / BRAND ----- */
+    .nav{position:fixed;inset:0 0 auto 0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:50;backdrop-filter:blur(6px);}
+    .brand{display:flex;gap:10px;align-items:center;font-family:'Orbitron',sans-serif;font-weight:800;letter-spacing:1px}
+    .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--neon-cyan);box-shadow:0 0 12px var(--neon-cyan),0 0 24px var(--neon-pink)}
+    .brand span{font-size:18px;text-transform:uppercase;text-shadow:0 0 10px var(--neon-cyan)}
+    .book-btn{display:inline-block;padding:10px 18px;border-radius:999px;text-decoration:none;color:#000;background:linear-gradient(90deg,var(--neon-pink),var(--neon-cyan));box-shadow:0 0 18px var(--neon-pink),0 0 24px var(--neon-cyan);font-weight:700}
+    .book-btn:hover{transform:translateY(-1px) scale(1.02)}
+
+    /* ----- HERO SLIDER WRAP ----- */
+    .hero{position:relative;height:100vh}
+    .bg-grad{position:absolute;inset:0;background:radial-gradient(1200px 600px at 20% 20%,rgba(255,46,166,.18),transparent 60%),radial-gradient(900px 500px at 80% 40%,rgba(0,229,255,.16),transparent 60%),radial-gradient(1000px 600px at 50% 90%,rgba(166,255,0,.12),transparent 60%);filter:saturate(140%);animation:huerotate 14s linear infinite}
+    @keyframes huerotate{from{filter:hue-rotate(0deg) saturate(140%)}to{filter:hue-rotate(360deg) saturate(140%)}}
+
+    /* subtle scanlines */
+    .scan{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.04) 0 2px,transparent 2px 4px);mix-blend-mode:overlay;opacity:.08;pointer-events:none}
+
+    /* PARTICLE CANVAS */
+    canvas#fx{position:absolute;inset:0;z-index:1;pointer-events:none}
+
+    /* Swiper base */
+    .swiper{height:100%;z-index:2}
+    .swiper-slide{display:flex;align-items:center;justify-content:center;padding:0 6vw;gap:min(6vw,48px)}
+
+    /* slide two-column layout */
+    .col{flex:1;min-width:0}
+    .left{display:flex;flex-direction:column;gap:16px}
+    .eyebrow{font:700 13px/1 'Orbitron',sans-serif;letter-spacing:0.15em;color:#bff;opacity:.9;text-shadow:0 0 10px var(--neon-cyan)}
+    .title{font:800 clamp(36px,6vw,72px)/1.05 'Orbitron',sans-serif;text-transform:uppercase}
+    .title .glow{display:inline-block;text-shadow:0 0 14px var(--neon-cyan),0 0 28px var(--neon-cyan),0 0 42px var(--neon-pink)}
+    .subtitle{max-width:46ch;color:#b7d0d6;opacity:.9}
+    .cta-row{display:flex;gap:14px;align-items:center;margin-top:8px}
+    .ghost{border:1px solid rgba(255,255,255,.18);padding:10px 16px;border-radius:14px;color:#cfe;backdrop-filter:blur(6px);text-decoration:none}
+
+    .right{display:grid;place-items:end}
+    .player{width:min(42vw,560px);max-width:100%;filter:drop-shadow(0 0 16px rgba(0,229,255,.6)) drop-shadow(0 0 28px rgba(255,46,166,.35));transform:translateZ(0)}
+
+    /* flying neon ball */
+    .ball{position:fixed;top:50%;left:-80px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#cfffff 35%,rgba(0,229,255,1) 70%);box-shadow:0 0 18px var(--neon-cyan),0 0 36px var(--neon-cyan),0 0 22px rgba(255,46,166,.65);z-index:5;pointer-events:none}
+
+    /* PAGINATION + ARROWS */
+    .swiper-pagination-bullet{background:rgba(255,255,255,.5);opacity:.7}
+    .swiper-pagination-bullet-active{background:var(--neon-cyan);box-shadow:0 0 10px var(--neon-cyan)}
+    .swiper-button-next,.swiper-button-prev{color:#eaffff;text-shadow:0 0 10px var(--neon-cyan)}
+
+    /* OFFERINGS */
+    .offers{padding:72px 24px 96px;border-top:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.35))}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:1100px;margin:0 auto}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:22px;box-shadow:0 10px 40px rgba(0,229,255,.08),inset 0 0 30px rgba(255,46,166,.06);transition:transform .3s ease, box-shadow .3s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 14px 60px rgba(0,229,255,.18),inset 0 0 40px rgba(255,46,166,.08)}
+    .card h3{font:700 20px/1.2 'Orbitron',sans-serif;margin:10px 0 8px;text-shadow:0 0 8px var(--neon-pink)}
+    .card p{opacity:.85}
+
+    .footer{padding:40px 20px;text-align:center;color:#9db6bb;border-top:1px solid rgba(255,255,255,.06)}
+
+    @media (max-width: 860px){
+      .swiper-slide{flex-direction:column;justify-content:center;text-align:center}
+      .right{place-items:center}
+      .player{width:min(80vw,520px)}
+      .title{font-size:clamp(32px,9vw,56px)}
+    }
+  </style>
 </head>
 <body>
-    <div class="ball" id="ball"></div>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="brand"><span class="logo-dot"></span><span>Neon Sports Arena</span></div>
+    <a class="book-btn" href="https://booking.example.com" target="_blank" rel="noopener">Book Now</a>
+  </div>
+
+  <!-- HERO with particles + slider -->
+  <section class="hero">
+    <div class="bg-grad"></div>
+    <canvas id="fx"></canvas>
+    <div class="scan"></div>
 
     <div class="swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="slide-text">Pickleball Magic</div>
-                <div class="slide-image"><img src="https://i.ibb.co/0F3g6bJ/pickleball-player.png" alt="Pickleball Player"></div>
+      <div class="swiper-wrapper">
+        <!-- Slide 1: Pickleball -->
+        <div class="swiper-slide">
+          <div class="col left">
+            <span class="eyebrow">Glow League • Night Play</span>
+            <h1 class="title"><span class="glow">Neon</span> Pickleball</h1>
+            <p class="subtitle">Fast rallies. UV lines. Pumping beats. Grab a paddle and light up the court.</p>
+            <div class="cta-row">
+              <a href="https://booking.example.com" class="book-btn" target="_blank" rel="noopener">Play Pickleball</a>
+              <a href="#offers" class="ghost">See Offerings</a>
             </div>
-            <div class="swiper-slide">
-                <div class="slide-text">Level Up</div>
-                <div class="slide-image"><img src="https://i.ibb.co/YPLWN3K/gaming-player.png" alt="Gamer"></div>
-            </div>
-            <div class="swiper-slide">
-                <div class="slide-text">Cue the Fun</div>
-                <div class="slide-image"><img src="https://i.ibb.co/9GB4s7W/snooker-player.png" alt="Snooker Player"></div>
-            </div>
+          </div>
+          <div class="col right">
+            <img class="player" src="https://i.ibb.co/0F3g6bJ/pickleball-player.png" alt="Pickleball Player"/>
+          </div>
         </div>
+
+        <!-- Slide 2: Gaming -->
+        <div class="swiper-slide">
+          <div class="col left">
+            <span class="eyebrow">Esports • FIFA • Co-op</span>
+            <h2 class="title">Level <span class="glow">Up</span> Gaming</h2>
+            <p class="subtitle">4K big screens, pro controllers, neon vibe. Drop in, rank up, repeat.</p>
+            <div class="cta-row">
+              <a href="https://booking.example.com" class="book-btn" target="_blank" rel="noopener">Game Session</a>
+              <a href="#offers" class="ghost">See Offerings</a>
+            </div>
+          </div>
+          <div class="col right">
+            <img class="player" src="https://i.ibb.co/YPLWN3K/gaming-player.png" alt="Gamer with controller"/>
+          </div>
+        </div>
+
+        <!-- Slide 3: Snooker -->
+        <div class="swiper-slide">
+          <div class="col left">
+            <span class="eyebrow">Pro Tables • Quiet Focus</span>
+            <h2 class="title">Snooker <span class="glow">Elite</span></h2>
+            <p class="subtitle">Classic precision meets future glow. Line up, strike true, celebrate clean.</p>
+            <div class="cta-row">
+              <a href="https://booking.example.com" class="book-btn" target="_blank" rel="noopener">Book a Table</a>
+              <a href="#offers" class="ghost">See Offerings</a>
+            </div>
+          </div>
+          <div class="col right">
+            <img class="player" src="https://i.ibb.co/9GB4s7W/snooker-player.png" alt="Snooker Player"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
     </div>
 
-    <section class="arena-section">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1611542754360-3f4a5cfe5a0b" alt="Neon Pickleball" />
-            <h3>Neon Pickleball</h3>
-            <p>Experience the thrill of pickleball under glowing neon lights. Fast-paced fun with a vibrant twist!</p>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1606813902914-5a38d7b68ed7" alt="Gaming Arena" />
-            <h3>Gaming Arena</h3>
-            <p>Step into our immersive gaming zone with state-of-the-art consoles and dazzling neon vibes.</p>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1563298723-dcfebaa392e3" alt="Snooker" />
-            <h3>Neon Snooker</h3>
-            <p>Classic snooker in a futuristic neon-lit environment for an unforgettable playing experience.</p>
-        </div>
-    </section>
+    <!-- Connected ball -->
+    <div class="ball" id="ball"></div>
+  </section>
 
-    <div style="text-align:center; margin-bottom:50px;">
-        <a href="https://booking.example.com" target="_blank" class="book-btn">Book Now</a>
+  <!-- OFFERINGS GRID -->
+  <section id="offers" class="offers">
+    <div class="grid">
+      <article class="card">
+        <h3>Neon Pickleball</h3>
+        <p>Glow-in-the-dark courts, fast matches, paddle rental included. Doubles & singles slots available.</p>
+      </article>
+      <article class="card">
+        <h3>Gaming Arena</h3>
+        <p>FIFA, F1, shooters & party games. 4K displays, high-refresh monitors, team play booths.</p>
+      </article>
+      <article class="card">
+        <h3>Snooker Lounge</h3>
+        <p>Tournament-grade tables, pro cues, calm ambience. Hourly and block bookings.</p>
+      </article>
     </div>
+  </section>
 
-    <footer>
-        © 2025 Neon Sports Arena. All Rights Reserved.
-    </footer>
+  <div class="footer">© 2025 Neon Sports Arena. All rights reserved.</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script>
-        const ball = document.getElementById('ball');
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            autoplay: { delay: 3000, disableOnInteraction: false },
-            on: {
-                slideChangeTransitionStart: function () {
-                    gsap.fromTo(ball, { x: -100, opacity: 1 }, { x: window.innerWidth + 100, duration: 1.2, onComplete: () => gsap.set(ball, { opacity: 0 }) });
-                },
-                slideChangeTransitionEnd: function () {
-                    gsap.set(ball, { x: -100, opacity: 1 });
-                }
-            }
-        });
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+  <script>
+    // --------- PARTICLE BACKGROUND (lightweight, no Three.js) ---------
+    const cvs = document.getElementById('fx');
+    const ctx = cvs.getContext('2d');
+    let w, h, particles = [];
+    function resize(){w= c"";}
+  </script>
+  <script>
+    // Proper particle script (separate to avoid truncation)
+    (function(){
+      const cvs = document.getElementById('fx');
+      const ctx = cvs.getContext('2d');
+      let W = innerWidth, H = innerHeight; cvs.width = W; cvs.height = H;
+      const COUNT = Math.min(180, Math.floor((W*H)/20000)); // adaptive
+      const parts = new Array(COUNT).fill(0).map(()=>({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()-.5)*0.4,
+        vy: (Math.random()-.5)*0.4,
+        r: Math.random()*1.8+0.4,
+        hue: Math.random()*360
+      }));
+      function tick(){
+        ctx.clearRect(0,0,W,H);
+        for(const p of parts){
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0) p.x=W; if(p.x>W) p.x=0; if(p.y<0) p.y=H; if(p.y>H) p.y=0;
+          const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*8);
+          g.addColorStop(0,'hsla('+p.hue+',100%,70%,.9)');
+          g.addColorStop(1,'hsla('+p.hue+',100%,50%,0)');
+          ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*6,0,Math.PI*2); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      addEventListener('resize',()=>{W=innerWidth;H=innerHeight;cvs.width=W;cvs.height=H;});
+      addEventListener('pointermove',e=>{const cx=e.clientX, cy=e.clientY; for(const p of parts){const dx=p.x-cx, dy=p.y-cy, d=Math.hypot(dx,dy)||1; const f = Math.min(8/(d),0.06); p.vx += dx/d * f; p.vy += dy/d * f;}});
+      tick();
+    })();
+
+    // --------- SWIPER + CONNECTED BALL ANIMS ---------
+    gsap.registerPlugin(MotionPathPlugin);
+    const ball = document.getElementById('ball');
+    const swiper = new Swiper('.swiper',{
+      speed: 900,
+      loop: true,
+      autoplay: { delay: 3600, disableOnInteraction:false },
+      pagination: { el: '.swiper-pagination', clickable:true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      on: {
+        slideChangeTransitionStart(){ flyBall(); revealIn(); },
+      }
+    });
+
+    function flyBall(){
+      const y = innerHeight*0.38 + (Math.random()*innerHeight*0.12);
+      const path = [
+        {x: -60, y: y},
+        {x: innerWidth*0.35, y: y - 80},
+        {x: innerWidth*0.72, y: y + 40},
+        {x: innerWidth + 80, y: y - 20}
+      ];
+      gsap.set(ball,{opacity:1});
+      gsap.fromTo(ball,{x:path[0].x, y:path[0].y, scale:0.9},{
+        duration: 1.1,
+        ease: 'power2.out',
+        motionPath:{path:path, curviness:1.2},
+        scale:1.15,
+        onComplete:()=>gsap.to(ball,{opacity:0,duration:.25})
+      });
+    }
+
+    function revealIn(){
+      const active = document.querySelector('.swiper-slide-active');
+      const txt = active.querySelector('.left');
+      const img = active.querySelector('.player');
+      gsap.fromTo(txt.children,{y:28,opacity:0},{y:0,opacity:1,stagger:.08,duration:.6,ease:'power3.out'});
+      gsap.fromTo(img,{x:40,rotateZ:1.5,scale:.96,opacity:.7},{x:0,rotateZ:0,scale:1,opacity:1,duration:.8,ease:'power3.out'});
+    }
+
+    // initial enter
+    window.addEventListener('load',()=>{revealIn(); flyBall();});
+
+    // subtle parallax on pointer
+    document.addEventListener('pointermove',e=>{
+      const active = document.querySelector('.swiper-slide-active .player');
+      if(!active) return; const dx=(e.clientX/innerWidth - .5); const dy=(e.clientY/innerHeight - .5);
+      gsap.to(active,{x:dx*12,y:dy*8,rotateZ:dx*2,duration:.4,ease:'power2.out'});
+    });
+  </script>
 </body>
 </html>

@@ -1,241 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neon Sports Arena</title>
-  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0a0a;
-      --neon-cyan: #00e5ff;
-      --neon-pink: #ff2ea6;
-      --neon-lime: #a6ff00;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-      color: white;
-      overflow-x: hidden;
-    }
-
-    /* Navigation */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 64px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 24px;
-      z-index: 50;
-      backdrop-filter: blur(6px);
-    }
-
-    .brand {
-      font-family: 'Audiowide', sans-serif;
-      font-size: 20px;
-      letter-spacing: 2px;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 12px var(--neon-cyan), 0 0 24px var(--neon-pink);
-    }
-
-    .book-btn {
-      padding: 10px 24px;
-      font-weight: 700;
-      border-radius: 50px;
-      text-decoration: none;
-      background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
-      color: black;
-      box-shadow: 0 0 15px var(--neon-pink), 0 0 20px var(--neon-cyan);
-      transition: transform 0.3s ease;
-    }
-
-    .book-btn:hover {
-      transform: translateY(-3px) scale(1.03);
-    }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-      background: linear-gradient(120deg, #0a0a0a, #050505);
-      background-size: 400% 400%;
-      animation: bgAnim 20s ease infinite;
-    }
-
-    @keyframes bgAnim {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .headline, .subtitle, .cta-button {
-      opacity: 0;
-      transform: translateY(50px);
-    }
-
-    .headline {
-      font-family: 'Audiowide', sans-serif;
-      font-size: clamp(48px, 8vw, 96px);
-      line-height: 1.1;
-      letter-spacing: 2px;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 12px var(--neon-cyan), 0 0 24px var(--neon-pink);
-    }
-
-    .headline span {
-      display: block;
-    }
-
-    .subtitle {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(20px, 3vw, 28px);
-      color: #b7d0d6;
-      margin-top: 20px;
-      text-shadow: 0 0 6px var(--neon-cyan);
-    }
-
-    .cta-button {
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
-      color: black;
-      box-shadow: 0 0 15px var(--neon-pink), 0 0 20px var(--neon-cyan);
-      transition: transform 0.3s ease;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-3px);
-    }
-
-    /* Offerings Section */
-    .offers {
-      padding: 72px 24px 96px;
-      border-top: 1px solid rgba(255,255,255,.06);
-      background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.35));
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 40px rgba(0,229,255,.08), inset 0 0 30px rgba(255,46,166,.06);
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 60px rgba(0,229,255,.18), inset 0 0 40px rgba(255,46,166,.08);
-    }
-
-    .card h3 {
-      font: 700 20px/1.2 'Orbitron', sans-serif;
-      margin: 10px 0 8px;
-      text-shadow: 0 0 8px var(--neon-pink);
-    }
-
-    .card p {
-      opacity: .85;
-    }
-
-    .footer {
-      padding: 40px 20px;
-      text-align: center;
-      color: #9db6bb;
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-
-    @media (max-width: 860px) {
-      .headline { font-size: clamp(32px, 9vw, 56px); }
-      .subtitle { font-size: clamp(16px, 4vw, 22px); }
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neon Sports Arena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<style>
+:root{
+  --bg:#0a0a0a;
+  --neon-cyan:#00e5ff;
+  --neon-pink:#ff2ea6;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Orbitron',sans-serif;overflow-x:hidden;background:var(--bg);color:white}
+.nav{position:fixed;top:0;left:0;width:100%;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:50;backdrop-filter:blur(6px)}
+.brand{font-family:'Audiowide',sans-serif;font-size:20px;letter-spacing:1px;color:var(--neon-cyan);text-shadow:0 0 12px var(--neon-cyan),0 0 24px var(--neon-pink)}
+.book-btn{padding:10px 18px;border-radius:999px;text-decoration:none;color:#000;background:linear-gradient(90deg,var(--neon-pink),var(--neon-cyan));box-shadow:0 0 18px var(--neon-pink),0 0 24px var(--neon-cyan);font-weight:700}
+.book-btn:hover{transform:translateY(-1px) scale(1.02)}
+.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(120deg,#0a0a0a,#050505);background-size:400% 400%;animation:bgAnim 20s ease infinite}
+@keyframes bgAnim{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.swiper{height:100%;width:100%;position:relative;z-index:2}
+.swiper-slide{display:flex;align-items:center;justify-content:center;position:relative;perspective:1200px}
+.text-layer{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:5;pointer-events:none}
+.headline{font-family:'Audiowide',sans-serif;font-size:clamp(48px,8vw,96px);line-height:1.1;letter-spacing:2px;color:var(--neon-cyan);opacity:0;text-shadow:0 0 12px var(--neon-cyan),0 0 24px var(--neon-pink)}
+.headline span{display:block}
+.subtitle{font-family:'Orbitron',sans-serif;font-size:clamp(20px,3vw,28px);color:#b7d0d6;opacity:0;margin-top:12px;text-shadow:0 0 6px var(--neon-cyan)}
+.player{position:absolute;bottom:0;max-width:35vw;opacity:0;z-index:2;filter:drop-shadow(0 0 16px rgba(0,229,255,.4)) drop-shadow(0 0 28px rgba(255,46,166,.3))}
+.swiper-button-next,.swiper-button-prev{color:#eaffff;text-shadow:0 0 10px var(--neon-cyan)}
+.swiper-pagination-bullet{background:rgba(255,255,255,.5);opacity:.7}
+.swiper-pagination-bullet-active{background:var(--neon-cyan);box-shadow:0 0 10px var(--neon-cyan)}
+.offers{padding:72px 24px 96px;border-top:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.35))}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:1100px;margin:0 auto}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:22px;box-shadow:0 10px 40px rgba(0,229,255,.08),inset 0 0 30px rgba(255,46,166,.06);transition:transform .3s ease, box-shadow .3s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 60px rgba(0,229,255,.18),inset 0 0 40px rgba(255,46,166,.08)}
+.card h3{font:700 20px/1.2 'Orbitron',sans-serif;margin:10px 0 8px;text-shadow:0 0 8px var(--neon-pink)}
+.card p{opacity:.85}
+.footer{padding:40px 20px;text-align:center;color:#9db6bb;border-top:1px solid rgba(255,255,255,.06)}
+@media (max-width: 860px){.player{max-width:60vw}.headline{font-size:clamp(32px,9vw,56px)}}
+</style>
 </head>
 <body>
+<div class="nav">
+<div class="brand">Neon Sports Arena</div>
+<a class="book-btn" href="https://booking.example.com" target="_blank" rel="noopener">Book Now</a>
+</div>
 
-  <!-- Navigation -->
-  <div class="nav">
-    <div class="brand">Neon Sports Arena</div>
-    <a class="book-btn" href="https://booking.example.com" target="_blank" rel="noopener">Book Now</a>
-  </div>
+<section class="hero">
+<div class="swiper">
+<div class="swiper-wrapper">
+<!-- Slide 1 -->
+<div class="swiper-slide">
+<img class="player" src="https://i.ibb.co/0F3g6bJ/pickleball-player.png" alt="Pickleball Player" />
+<div class="text-layer">
+<h1 class="headline"><span>Neon</span><span>Pickleball</span></h1>
+<p class="subtitle">Fast rallies. UV lines. Pumping beats. Grab a paddle and light up the court.</p>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="swiper-slide">
+<img class="player" src="https://i.ibb.co/YPLWN3K/gaming-player.png" alt="Gamer with controller" />
+<div class="text-layer">
+<h1 class="headline"><span>Level</span><span>Up Gaming</span></h1>
+<p class="subtitle">4K big screens, pro controllers, neon vibe. Drop in, rank up, repeat.</p>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="swiper-slide">
+<img class="player" src="https://i.ibb.co/9GB4s7W/snooker-player.png" alt="Snooker Player" />
+<div class="text-layer">
+<h1 class="headline"><span>Snooker</span><span>Elite</span></h1>
+<p class="subtitle">Classic precision meets future glow. Line up, strike true, celebrate clean.</p>
+</div>
+</div>
+</div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+<div class="swiper-pagination"></div>
+</div>
+</section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div>
-      <h1 class="headline"><span>Neon</span><span>Pickleball</span></h1>
-      <p class="subtitle">Fast rallies. UV lines. Pumping beats. Grab a paddle and light up the court.</p>
-      <button class="cta-button">Book Now</button>
-    </div>
-  </section>
+<section id="offers" class="offers">
+<div class="grid">
+<article class="card">
+<h3>Neon Pickleball</h3>
+<p>Glow-in-the-dark courts, fast matches, paddle rental included. Doubles & singles slots available.</p>
+</article>
+<article class="card">
+<h3>Gaming Arena</h3>
+<p>FIFA, F1, shooters & party games. 4K displays, high-refresh monitors, team play booths.</p>
+</article>
+<article class="card">
+<h3>Snooker Lounge</h3>
+<p>Tournament-grade tables, pro cues, calm ambience. Hourly and block bookings.</p>
+</article>
+</div>
+</section>
+<div class="footer">© 2025 Neon Sports Arena. All rights reserved.</div>
 
-  <!-- Offerings Section -->
-  <section class="offers">
-    <div class="grid">
-      <div class="card">
-        <h3>Neon Pickleball</h3>
-        <p>Glow-in-the-dark courts, fast matches, paddle rental included. Doubles & singles slots available.</p>
-      </div>
-      <div class="card">
-        <h3>Gaming Arena</h3>
-        <p>FIFA, F1, shooters & party games. 4K displays, high-refresh monitors, team play booths.</p>
-      </div>
-      <div class="card">
-        <h3>Snooker Lounge</h3>
-        <p>Tournament-grade tables, pro cues, calm ambience. Hourly and block bookings.</p>
-      </div>
-    </div>
-  </section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+const swiper=new Swiper('.swiper',{speed:1200,loop:true,autoplay:{delay:4000,disableOnInteraction:false},pagination:{el:'.swiper-pagination',clickable:true},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},on:{slideChangeTransitionStart(){animateSlide();}}});
+function animateSlide(){
+  const active=document.querySelector('.swiper-slide-active');
+  const headline=active.querySelectorAll('.headline span');
+  const subtitle=active.querySelector('.subtitle');
+  const player=active.querySelector('.player');
+  gsap.set([...headline,subtitle,player],{opacity:0,y:30});
+  gsap.to(headline,{opacity:1,y:0,stagger:0.15,duration:0.9,ease:'power3.out'});
+  gsap.to(subtitle,{opacity:1,y:0,duration:0.9,delay:0.5,ease:'power3.out'});
+  gsap.to(player,{opacity:1,y:0,duration:1.2,ease:'power3.out'});
+}
+window.addEventListener('load',animateSlide);
 
-  <div class="footer">© 2025 Neon Sports Arena. All rights reserved.</div>
-
-  <!-- GSAP Animation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script>
-    window.addEventListener('load', () => {
-      const headlineSpans = document.querySelectorAll('.headline span');
-      const subtitle = document.querySelector('.subtitle');
-      const cta = document.querySelector('.cta-button');
-
-      gsap.fromTo(headlineSpans, 
-        { opacity: 0, y: 50 }, 
-        { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power3.out' }
-      );
-
-      gsap.fromTo(subtitle, 
-        { opacity: 0, y: 30 }, 
-        { opacity: 1, y: 0, duration: 1, delay: 0.6, ease: 'power3.out' }
-      );
-
-      gsap.fromTo(cta, 
-        { opacity: 0, y: 30 }, 
-        { opacity: 1, y: 0, duration: 1, delay: 1.2, ease: 'power3.out' }
-      );
-    });
-  </script>
+document.addEventListener('pointermove',e=>{
+  const slides=document.querySelectorAll('.swiper-slide');
+  slides.forEach(slide=>{
+    const player=slide.querySelector('.player');
+    const text=slide.querySelector('.text-layer');
+    if(!player || !text) return;
+    const dx=(e.clientX/window.innerWidth-0.5);
+    const dy=(e.clientY/window.innerHeight-0.5);
+    gsap.to(player,{x:dx*12,y:dy*8,rotateZ:dx*2,duration:.4,ease:'power2.out'});
+    gsap.to(text,{x:dx*6,y:dy*4,duration:.4,ease:'power2.out'});
+  });
+});
+</script>
 </body>
 </html>
